@@ -1,0 +1,11 @@
+; $Id$
+name = "TNE Rubik"
+description = "Clean admin theme."
+base theme = "rubik"
+core = "6.x"
+engine = "phptemplate"
+
+scripts[] = "js/tne.rubik.js"
+scripts[] = "js/jquery.qtip-1.0.0-rc3.min.js"
+
+stylesheets[screen][] = "css/tne-rubik.css"

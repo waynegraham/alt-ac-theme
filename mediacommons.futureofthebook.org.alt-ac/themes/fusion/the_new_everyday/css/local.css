@@ -1,0 +1,94 @@
+/* $Id$ */
+
+/****************************/
+/* LOCAL CSS                */
+/****************************/
+
+/* Put your custom CSS and CSS overrides in this file and  */
+/* rename it local.css.  By restricting your CSS changes   */
+/* to local.css, your changes will not be overwritten when */
+/* upgrading to a new version of this theme.  You can also */
+/* use a local-rtl.css file for the equivalent in RTL.     */
+
+/* Steps to activate local.css:                       */
+/* 1. Add your custom CSS to this file                */
+/* 2. Rename this file to local.css                   */
+/* 3. Clear cached data at admin/settings/performance */
+
+body {
+	background: #8a8a8a url(../images/background.jpg) 0 0 repeat-x;
+	background-image: -webkit-gradient(
+	    linear,
+	    left top,
+	    left bottom,
+	    color-stop(0, rgb(201,201,201)),
+	    color-stop(0.5, rgb(148,148,148)),
+	    color-stop(0.75, rgb(138,138,138))
+	);
+	background-image: -moz-linear-gradient(
+	    center top,
+	    rgb(201,201,201) 0%,
+	    rgb(148,148,148) 50%,
+	    rgb(138,138,138) 75%
+	);
+	margin: 0;
+	padding: 0;
+}
+#page {
+	background:#fff;
+	width:976px;
+	margin-left: auto;
+	margin-right: auto; 
+	margin-bottom:30px;
+	-moz-box-shadow: 0px 5px 20px #333;
+	-webkit-box-shadow: 0px 5px 20px #333;
+	-ms-box-shadow: 0px 5px 20px #333;
+	box-shadow: 0px 5px 20px #333;	
+	-moz-border-radius-bottomleft: 20px;  /*Bottom Left Corner Rounded*/
+	-moz-border-radius-bottomright: 20px;  /*Bottom right Corner Rounded*/
+	-webkit-border-bottom-left-radius: 20px; /*Bottom Right Corner Rounded*/
+	-webkit-border-bottom-right-radius: 20px;  /*Bottom Right Corner Rounded*/
+	-khtml-border-radius-bottomleft: 20px; /*Bottom Right Corner Rounded*/
+	-khtml-border-radius-bottomright: 20px; /*Bottom Right Corner Rounded*/
+	border-bottom-left-radius: 20px; /*Bottom Right Corner Rounded*/
+	border-bottom-right-radius: 20px; /*Bottom Right Corner Rounded*/
+}
+
+#page-inner {
+	border-top:9px solid #1bb6b8;
+}
+
+#primary-menu ul.menu, #primary-menu ul.menu li {
+	margin:0;
+	padding:0;
+	font-weight:bold;
+}
+#primary-menu ul.menu li a {
+	font-size: 1.2857em; /* 18px */
+	line-height: 1.1111em; /* 20px */
+	margin-top: 1.1111em;
+	margin-bottom: 0em;
+}
+
+a:link
+  {
+	color:#1bb6b8;
+	text-decoration:none;
+  }
+
+a:visited
+  {
+	text-decoration:none;
+	color:#1bb6b8;
+  }
+
+a:hover,
+a:focus
+  {
+	text-decoration:underline;
+  }
+
+a:active
+  {
+	text-decoration:none;	
+  }

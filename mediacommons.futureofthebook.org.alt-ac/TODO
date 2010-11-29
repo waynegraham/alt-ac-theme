@@ -1,0 +1,18 @@
+- after set to published cluster still says 'No' in published column of dashboard
+
+- need login menu when user is logged out
+
+-- contribute to cluster link is not showing up when user is invited to a cluster
+
+- user cannot publish their own contributed pieces
+	http://drupal.org/project/override_node_options
+
+-- first contributed piece is showing up in the second slot of the cluster
+
+-- how to hanlde translations?
+
+-- need to install footnote module
+
+-- Change 'Create a new Contributed Pieces' to 'Contribute a piece'
+
+-- multimedia template needs work

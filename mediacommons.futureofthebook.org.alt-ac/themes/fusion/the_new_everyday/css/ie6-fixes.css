@@ -1,0 +1,19 @@
+/* Alpha transparency png fix */
+/* To use: uncomment & change path to match your Fusion Core location*/
+/*
+div.pngfix,
+#logo img {
+  behavior: url(/sites/all/themes/fusion/fusion_core/js/iepngfix.htc);
+}
+*/
+
+#page {
+/* For IE 8 */
+-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=10, Direction=135, Color='#333333')";
+/* For IE 5.5 - 7 */
+filter: progid:DXImageTransform.Microsoft.Shadow(Strength=10, Direction=135, Color='#333333');
+}         
+
+#cluster-right {
+	display:inline;    
+}

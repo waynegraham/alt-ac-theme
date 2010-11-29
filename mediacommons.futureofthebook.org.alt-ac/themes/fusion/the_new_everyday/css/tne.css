@@ -1,0 +1,13 @@
+.wrapper #node-pane, #comments {
+  float: left;
+}
+
+#comments {
+  width: 300px;
+  position: relative;
+}
+
+#comments h2.comments-header,  .node-type-contributed-pieces .all-attached-images {
+  display: none;
+  visibility: hidden;
+}

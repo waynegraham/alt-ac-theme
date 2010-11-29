@@ -1,0 +1,161 @@
+/*
+ * admin-tne.css
+ * Costume CSS Style
+ */
+
+body {
+  min-width: 960px;
+}
+
+#page, #page-title {
+  width: 960px;
+  min-width: 960px;  
+  padding: auto;
+}
+
+.attached-images {
+  padding-bottom: 30px;
+}
+
+.attached-images .fieldset-content {
+  position: relative;
+  top: 30px;
+  padding-top: 10px !important; 
+}
+
+#others_tabs {
+  font-size: 10px;
+}
+
+#edit-field-document-textarea-body-0-value-wrapper label, 
+#field-reference-items, 
+#edit-iids-wrapper,
+.group-document .input-format {
+  display: none;
+  visibility: hidden;
+}
+
+#edit-field-layout-multimedia-value--wrapper,
+.group-multimedia, 
+.group-video, 
+.group-image {
+  display: none;
+}
+
+   
+#field-clusters-items, 
+#field-contributors-items, 
+#field-reference-items, 
+#field-contributed-piece-items, 
+#field-additional-authors-items {
+  margin-bottom: 1em;
+}
+
+#field-additional-authors-items .description,   
+.form-item {
+  margin-bottom: .5em;
+}
+
+ol.footnotes li {
+  list-style-type: none;
+}
+
+#edit-field-thumbnail-0-ahah-wrapper,
+.attached-images .form-item.form-item-labeled {
+  clear: both;
+	min-height: 110px;
+	border: 1px solid #ccc;
+}
+   
+.form-item.form-item-labeled img.image-thumbnail {
+  float: left
+  display: block;
+	margin-top: .5em;
+}
+
+.presetSizes {
+  float: right;
+	clear: both;
+	display: block;
+}
+
+.presetSizes a {
+  font-size: 10px;
+	display: block;
+}
+
+.attached-images .form-item {
+	display: block;
+	margin-bottom: 1em;
+}
+	
+.attached-images #edit-image-title-wrapper {
+   min-height: 50px !important;
+}
+
+.attached-images #edit-image-wrapper {
+  min-height: 40px !important;
+}
+   
+.attached-images #edit-iids-wrapper {
+  min-height: 130px !important;
+}
+
+label.thumbnail {
+  background-color: #F4F4F4;;
+}
+   
+.presetSizes a:hover {
+  text-decoration: underline;
+}
+
+.attached-images-op {
+  margin-top: 1em;
+  background-color: #fff;
+  border-radius:3px;
+  -moz-border-radius:3px;
+  -webkit-border-radius:3px;
+}   
+
+.attached-images-op h2 {
+  position: relative;
+  font-weight: normal;
+}
+
+
+#edit-field-tagline-0-value {
+  -webkit-box-sizing: border-box;
+  width: 100%   	
+}
+
+#edit-image-attach-multiple {
+  margin-bottom: .5em;
+  margin-left: .5em;
+}
+
+fieldset.attached-images div.fieldset-content {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 300px;
+  max-height: 300px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+  
+fieldset.attached-images div.fieldset-content .form-item {
+  margin-bottom: .5em;
+}
+
+#field-additional-authors-items {
+  margin: 1em 0;
+}
+
+.fieldset-content .form-item {
+  border: none;
+}
+
+.modalframe-page-wrapper .filter-options {
+  display: none;
+  visibility: hidden; 
+} 
