@@ -11,7 +11,7 @@ stylesheets[all][] = css/local.css
 stylesheets[all][] = css/typography-alt-ac.css
 stylesheets[print][] = css/print-alt-ac.css
 
-scripts[] = script.js
+;scripts[] = script.js
 regions[sidebar_first] = sidebar first
 regions[sidebar_last] = sidebar last
 regions[header_top] = header top

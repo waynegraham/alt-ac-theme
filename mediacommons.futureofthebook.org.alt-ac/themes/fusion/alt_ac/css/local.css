@@ -55,7 +55,7 @@ body {
 }
 
 #page-inner {
-	border-top:9px solid #1bb6b8;
+	border-top:9px solid #be1e2d;
 }
 
 #primary-menu ul.menu, #primary-menu ul.menu li {
@@ -72,14 +72,14 @@ body {
 
 a:link
   {
-	color:#1bb6b8;
+	color:#a61b28;
 	text-decoration:none;
   }
 
 a:visited
   {
 	text-decoration:none;
-	color:#1bb6b8;
+	color:#670912;
   }
 
 a:hover,

@@ -98,7 +98,7 @@ function alt_ac_preprocess_search_result( &$vars ) {
       $thumbnail = $result_node->ss_thumbnail;
     }
     else {
-      $thumbnail = '<img src="'. base_path() . '/sites/mediacommons.futureofthebook.org.tne/files/contributed-pieces-th/the-new-everyday-sq.gif' . '" />'; // <----- Replace this path with the path to the real placeholder thumbnail
+      $thumbnail = '<img src="'. $base_url . '/' . file_directory_path() . '/contributed-pieces-th/alt-academy-logo-sq.png' . '" />'; // <----- Replace this path with the path to the real placeholder thumbnail
     }
     $div .= '<div class="search-result-thumbnail-contributed-piece">' . $thumbnail . '</div>';
     $div .= '<h4 class="search-result-title">' . l(truncate_utf8($result_node->title, 80, TRUE, TRUE), 'node/' . $result['node']->nid, array('attributes' => array('title' => t("$result_node->title")))) . '</h4>';
@@ -147,7 +147,7 @@ function alt_ac_get_user_avatar($uid) {
     }
   }
   if ( $picture == NULL ) {
-    $picture = $base_url . '/' . file_directory_path() . '/contributed-pieces-th/the-new-everyday-sq.gif'; //temporary
+    $picture = $base_url . '/' . file_directory_path() . '/contributed-pieces-th/alt-academy-logo-sq.png'; //temporary
   }
   return $picture;
 }
@@ -225,11 +225,11 @@ function alt_ac_preprocess_node(&$vars) {
    /* Contributed piece node preprocessing */
    if (preg_match('/(contributed)/i', $vars['node']->type)) {
         $vars['template_file'] = 'node-contributed-piece';
-		$authors_string = tne_contributed_by_title( l($vars['realname'], 'http://mediacommons.futureofthebook.org/user/'. $vars['uid'], array('attributes' => array('title' => t($vars['realname']),'class' => 'username'))), $vars['uid'], $vars['node']->field_additional_authors );
-		$authors_photos = tne_contributed_by_photos( str_replace('files/files', 'files', $vars['picture']),  $vars['node']->field_additional_authors );
-	    //$authors_description =  tne_contributed_by_description($vars['uid'], $vars['node']->field_additional_authors);
-	    //$vars['authors_description'] = tne_description($vars['uid']);
-	    //$vars['authors_description'] = tne_contributed_by_description($vars['uid'], $vars['node']->field_additional_authors);
+		$authors_string = alt_ac_contributed_by_title( l($vars['realname'], 'http://mediacommons.futureofthebook.org/user/'. $vars['uid'], array('attributes' => array('title' => t($vars['realname']),'class' => 'username'))), $vars['uid'], $vars['node']->field_additional_authors );
+		$authors_photos = alt_ac_contributed_by_photos( str_replace('files/files', 'files', $vars['picture']),  $vars['node']->field_additional_authors );
+	    //$authors_description =  alt_ac_contributed_by_description($vars['uid'], $vars['node']->field_additional_authors);
+	    //$vars['authors_description'] = alt_ac_description($vars['uid']);
+	    //$vars['authors_description'] = alt_ac_contributed_by_description($vars['uid'], $vars['node']->field_additional_authors);
 	if(!empty($vars['node']->field_tagline[0]['view'])) {
 			$vars['tagline'] = '<h4 class="tagline">'.$vars['node']->field_tagline[0]['view']. '</h4>';
 		}
@@ -246,7 +246,7 @@ function alt_ac_preprocess_node(&$vars) {
 
 		if ( !empty( $vars['node']->field_cluster[0]['view'] )) {
 		  $vars['parent_cluster'] = '<span class="part-cluster">' . t('Part of the Cluster') . ':</span><h4>'. $vars['node']->field_cluster[0]['view'] . '</h4>';
-          $vars['navigation'] = tne_cluster_navigator($vars['node']->field_cluster[0]['nid'], $vars['nid']);
+          $vars['navigation'] = alt_ac_cluster_navigator($vars['node']->field_cluster[0]['nid'], $vars['nid']);
 
 		}
 
@@ -297,8 +297,7 @@ function alt_ac_piece_div( $piece_node, $location ) {
 	  $piece_thumbnail_path = $piece_node->field_thumbnail[0]['filepath'];
 	}
 	else {
-		// $piece_thumbnail_path = '/sites/mediacommons.futureofthebook.org.tne/files/contributed-pieces-th/the-new-everyday-sq.gif'; // <----- Replace this path with the path to the real placeholder thumbnail
-      $piece_thumbnail_path = '/' . file_directory_path() . '/contributed-pieces-th/the-new-everyday-sq.gif'; // <----- Replace this path with the path to the real placeholder thumbnail
+      $piece_thumbnail_path = '/' . file_directory_path() . '/contributed-pieces-th/alt-academy-logo-sq.png'; // <----- Replace this path with the path to the real placeholder thumbnail
 	}
  	$div .= '<div class="cluster-piece-image">' . '<img src="' . base_path() . $piece_thumbnail_path . '" alt="'. check_plain($piece_node->title) .'" />' . '</div>';
     $div .= '<h4 class="cluster-piece-title">' . l(t(check_plain(truncate_utf8($piece_node->title, 80, TRUE, TRUE))), 'node/' . $piece_node->nid, array('attributes' => array('title' => t("$piece_node->title")))) . '</h4>';
