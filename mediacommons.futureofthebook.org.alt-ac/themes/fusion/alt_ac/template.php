@@ -102,14 +102,14 @@ function alt_ac_preprocess_search_result( &$vars ) {
     }
     $div .= '<div class="search-result-thumbnail-contributed-piece">' . $thumbnail . '</div>';
     $div .= '<h4 class="search-result-title">' . l(truncate_utf8($result_node->title, 80, TRUE, TRUE), 'node/' . $result['node']->nid, array('attributes' => array('title' => t("$result_node->title")))) . '</h4>';
-    $div .= '<div class="search-result-author-contributed-piece"><span class="contributor-name">Contributed by ' . l($result_node->realname, 'http://mediacommons.futureofthebook.org/user/' . $result_node->uid, array('attributes' => array('title' => t($result_node->realname), 'class' => 'username')));
+    $div .= '<div class="search-result-author-contributed-piece"><span class="contributor-name">Contributed by ' . l($result_node->realname, '/alt-ac/user/' . $result_node->uid, array('attributes' => array('title' => t($result_node->realname), 'class' => 'username')));
     $div .= '<br />' . format_date( $result_node->changed, 'custom', 'F d, Y' ) . '</span>';
     $div .= '<div class="user-picture"><img src="' . alt_ac_get_user_avatar($result_node->uid) . '" /></div>';
     $div .= '</div>';
   }
   if ( $result_node->type == 'response' ) {
     $div = '<div class="search-result-item search-result-response">';
-    $div .= '<div class="search-result-author-response"><span class="contributor-name">Response from ' . l($result_node->realname, 'http://mediacommons.futureofthebook.org/user/'. $result_node->uid, array('attributes' => array('title' => t($result_node->realname), 'class' => 'username'))) . '</span>';
+    $div .= '<div class="search-result-author-response"><span class="contributor-name">Response from ' . l($result_node->realname, '/alt-ac/user/'. $result_node->uid, array('attributes' => array('title' => t($result_node->realname), 'class' => 'username'))) . '</span>';
     $div .= '<div class="user-picture"><img src="' . alt_ac_get_user_avatar($result_node->uid) . '" /></div>';
     $div .= '<div class="search-result-timestamp">' . format_date( $result_node->changed, 'custom', 'F d, Y' ) . '</div>';
     $div .= '</div>';
@@ -168,7 +168,7 @@ function alt_ac_preprocess_node(&$vars) {
   }
 
   if ( $vars['node']->type == 'cluster' ) {
-    $vars['curator'] = '<div class="cluster-curator">Curated by ' . l($vars['realname'], 'http://mediacommons.futureofthebook.org/user/'. $vars['uid'], array('attributes' => array('title' => t($vars['realname']), 'class' => 'username'))) . '</div>';
+    $vars['curator'] = '<div class="cluster-curator">Curated by ' . l($vars['realname'], '/alt-ac/user/'. $vars['uid'], array('attributes' => array('title' => t($vars['realname']), 'class' => 'username'))) . '</div>';
     $vars['time_period'] = '<h6 class="time-period">'.format_date(strtotime($vars['node']->field_period[0]['value']), 'custom', 'F d, Y' ).'&ndash;'.format_date( strtotime($vars['node']->field_period[0]['value2']), 'custom', 'F d, Y' ).'</h6>';
     $vars['description'] = '<div class="cluster-description">' . truncate_utf8( $vars['node']->field_description[0]['safe'], 500, TRUE, TRUE ) . '</div>';
     if ( !empty( $vars['node']->field_video_embed_link[0]['embed'] ) ) {
@@ -189,14 +189,22 @@ function alt_ac_preprocess_node(&$vars) {
     if ( $vars['node']->field_contributors ) {
       $gravatar_module_path = base_path() . drupal_get_path('module', 'gravatar');
       $vars['contributors'] = '<div class="cluster-contributors-inner">';
+      
+      // TODO: fix multiple authors
       foreach ( (array)$vars['node']->field_contributors as $cont ) {
 			$account = user_load( array( 'uid' => $cont['uid'] ) );
+			
 			$vars['contributors'] .= '<div class="cluster-contributor">';
-			$vars['contributors'] .= '<div class="user-info"><p class="user-name">' . l($account->realname, 'http://mediacommons.futureofthebook.org/user/'. $account->uid , array('attributes' => array('title' => t($account->realname),'class' => 'username'))). '<br />';
-			if ( $account->profile_title ) { $vars['contributors'] .= '<span>' . $account->profile_title . ' at ' . truncate_utf8($account->profile_affiliation, 50, TRUE, TRUE )  . '</span>'; }
+			$vars['contributors'] .= '<div class="user-info"><p class="user-name">' . l($account->realname, '/alt-ac/user/'. $account->uid , array('attributes' => array('title' => t($account->realname),'class' => 'username'))). '<br />';
+			
+			if ( $account->profile_title ) { 
+			    $vars['contributors'] .= '<span>' . $account->profile_title . ' at ' . truncate_utf8($account->profile_affiliation, 50, TRUE, TRUE )  . '</span>'; 
+			}
+			
 			$vars['contributors'] .= '</p></div>';
             /* User pictures */
 			$vars['contributors'] .= '<div class="user-picture">';
+			
 			if ($account->picture) {
 				$up = theme('user_picture', $account);
 				$up = str_replace('files/files', 'files', $up);
@@ -225,7 +233,7 @@ function alt_ac_preprocess_node(&$vars) {
    /* Contributed piece node preprocessing */
    if (preg_match('/(contributed)/i', $vars['node']->type)) {
         $vars['template_file'] = 'node-contributed-piece';
-		$authors_string = alt_ac_contributed_by_title( l($vars['realname'], 'http://mediacommons.futureofthebook.org/user/'. $vars['uid'], array('attributes' => array('title' => t($vars['realname']),'class' => 'username'))), $vars['uid'], $vars['node']->field_additional_authors );
+		$authors_string = alt_ac_contributed_by_title( l($vars['realname'], '/alt-ac/user/'. $vars['uid'], array('attributes' => array('title' => t($vars['realname']),'class' => 'username'))), $vars['uid'], $vars['node']->field_additional_authors );
 		$authors_photos = alt_ac_contributed_by_photos( str_replace('files/files', 'files', $vars['picture']),  $vars['node']->field_additional_authors );
 	    //$authors_description =  alt_ac_contributed_by_description($vars['uid'], $vars['node']->field_additional_authors);
 	    //$vars['authors_description'] = alt_ac_description($vars['uid']);
@@ -268,7 +276,7 @@ function alt_ac_preprocess_node(&$vars) {
 	/* Response node preprocessing */
    if (preg_match('/(response)/i', $vars['node']->type)) {
      $vars['template_file'] = 'node-response';
-	 $vars['responder'] = '<div class="responder"><div class="responder-picture">' . $vars['picture'] . '</div><span>Response from <br/>' . l($vars['realname'], 'http://mediacommons.futureofthebook.org/user/'. $vars['uid'] , array('attributes' => array('title' => t($vars['realname']),'class' => 'username'))) . '</span><br /><span class="responder-time">' . format_date( $vars['created'], 'custom', 'F d, Y' ) . '</span></div>';
+	 $vars['responder'] = '<div class="responder"><div class="responder-picture">' . $vars['picture'] . '</div><span>Response from <br/>' . l($vars['realname'], '/alt-ac/user/'. $vars['uid'] , array('attributes' => array('title' => t($vars['realname']),'class' => 'username'))) . '</span><br /><span class="responder-time">' . format_date( $vars['created'], 'custom', 'F d, Y' ) . '</span></div>';
 	foreach($vars['node']->links as $link) {
 		$linkz .= '<li>'.l( t($link['title']), $link['href'], array('attributes' => array('title' => t($link['title']), 'class' => 'responses'), 'query' => $link['query'])).'</li>';
 	}
@@ -281,7 +289,7 @@ function alt_ac_preprocess_node(&$vars) {
 function alt_ac_piece_div( $piece_node, $location ) {
   $div = '';
   $piece_account = user_load( array( 'uid' => $piece_node->uid ) );
-	$authors_string = alt_ac_contributed_by( l($piece_account->realname, 'http://mediacommons.futureofthebook.org/user/'. $piece_node->uid , array('attributes' => array('title' => t($piece_account->realname), 'class' => 'username'))), $piece_node->field_additional_authors );
+	$authors_string = alt_ac_contributed_by( l($piece_account->realname, '/alt-ac/user/'. $piece_node->uid , array('attributes' => array('title' => t($piece_account->realname), 'class' => 'username'))), $piece_node->field_additional_authors );
   if ($piece_node->comment_count == 0) {
 	 $comment_count = '';
 	} elseif ($piece_node->comment_count == 1){
@@ -351,7 +359,7 @@ function alt_ac_contributed_by( $first_author_name, $additional_authors ) {
 
 		foreach( $additional_authors as $addauth ) {
 			$account = user_load( array( 'uid' => $addauth['uid']) );
-			$all_authors .=  l($account->realname, 'http://mediacommons.futureofthebook.org/user/'. $addauth['uid'] , array('attributes' => array('title' => t($account->realname),'class' => 'username')));
+			$all_authors .=  l($account->realname, '/alt-ac/user/'. $addauth['uid'] , array('attributes' => array('title' => t($account->realname),'class' => 'username')));
 			if ( next( $additional_authors )==true ) $all_authors .= ', ';
 		}
 	 }
@@ -365,11 +373,14 @@ function alt_ac_contributed_by_title( $first_author_name, $first_author_id, $add
 
 		foreach( $additional_authors as $addauth ) {
 			$account = user_load( array( 'uid' => $addauth['uid']) );
-			$all_authors .=  l($account->realname, 'http://mediacommons.futureofthebook.org/user/'. $addauth['uid'] , array('attributes' => array('title' => t($account->realname),'class' => 'username')));
-			if(!empty($account->profile_title)){
-				$all_authors .=  ' '.$account->profile_title.' at ';
-			}
-			$all_authors .=  $account->profile_affiliation;
+			$all_authors .=  l($account->realname, '/alt-ac/user/'. $addauth['uid'] , array('attributes' => array('title' => t($account->realname),'class' => 'username')));
+			
+			// removed to allow more authors to show up on a line
+			
+			// if(!empty($account->profile_title)){
+			//               $all_authors .=  ' '.$account->profile_title.' at ';
+			//           }
+			//           $all_authors .=  $account->profile_affiliation;
 			if ( next( $additional_authors )==true ) $all_authors .= ', ';
 		}
 	 }
