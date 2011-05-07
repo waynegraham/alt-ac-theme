@@ -308,7 +308,7 @@ function alt_ac_piece_div( $piece_node, $location ) {
       $piece_thumbnail_path = '/' . file_directory_path() . '/contributed-pieces-th/alt-academy-logo-sq.png'; // <----- Replace this path with the path to the real placeholder thumbnail
 	}
  	$div .= '<div class="cluster-piece-image">' . '<img src="' . base_path() . $piece_thumbnail_path . '" alt="'. check_plain($piece_node->title) .'" />' . '</div>';
-    $div .= '<h4 class="class">' . l(t(truncate_utf8($piece_node->title, 80, TRUE, TRUE)), 'node/' . $piece_node->nid, array('attributes' => array('title' => t("$piece_node->title")))) . '</h4>';
+    $div .= '<h4 class="cluster-piece-title">' . l(t(truncate_utf8($piece_node->title, 80, TRUE, TRUE)), 'node/' . $piece_node->nid, array('attributes' => array('title' => t("$piece_node->title")))) . '</h4>';
     $div .= '<p><span class="cluster-piece-contributor">' . $authors_string  . '</span>';
     $div .= '<span class="cluster-piece-revision">' . format_date( $piece_node->revision_timestamp, 'custom', 'F d, Y' ) . '</span></p>';
     $div .= '<div class="cluster-piece-comments">' . $comment_count . '</div>';
@@ -366,26 +366,18 @@ function alt_ac_contributed_by( $first_author_name, $additional_authors ) {
 	return $all_authors;
 }
 
-
-/**
- * 
- */
 function alt_ac_contributed_by_title( $first_author_name, $first_author_id, $additional_authors ) {
-	// $all_authors = $first_author_name.' '.alt_ac_description($first_author_id);
-	
-  $all_authors = $first_author_name;
-
-  // hacky way of doing this, but the default case is going to do this most of the time
-  if(empty($additional_authors[0]['uid'])) {
-    $all_authors .= ' ' . alt_ac_description($first_author_id);
-    return $all_authors;
-  }
-  
- // if ( !empty( $additional_authors[0]['uid'] ) ) {
-
-	 //$all_authors .= ',<br />';
+	//$all_authors = $first_author_name.' '.alt_ac_description($first_author_id);
+	$all_authors = $first_author_name;
+	// hack; shouldn't have two exit points; but this is the default case	
+	if(empty($additional_authors[0]['uid'])) {
+		$all_authors .= ' ' . alt_ac_description($first_author_id);
+		return $all_authors;
+	}
+ 
+	if ( !empty( $additional_authors[0]['uid'] ) ) {
 	 $all_authors .= ', ';
-    
+
 		foreach( $additional_authors as $addauth ) {
 			$account = user_load( array( 'uid' => $addauth['uid']) );
 			$all_authors .=  l($account->realname, 'user/'. $addauth['uid'] , array('attributes' => array('title' => t($account->realname),'class' => 'username')));
@@ -398,7 +390,7 @@ function alt_ac_contributed_by_title( $first_author_name, $first_author_id, $add
 			//           $all_authors .=  $account->profile_affiliation;
 			if ( next( $additional_authors )==true ) $all_authors .= ', ';
 		}
-	// }
+	 }
 	return $all_authors;
 }
 function alt_ac_description($author_id) {
@@ -490,3 +482,4 @@ tne_preprocess_node(&$vars) {
   // update the themed links
   $vars['links'] = theme_links($vars['node']->links, array('class' => 'links inline'));
 }*/
+
