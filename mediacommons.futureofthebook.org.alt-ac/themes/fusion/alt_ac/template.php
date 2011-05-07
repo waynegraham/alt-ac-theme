@@ -366,11 +366,26 @@ function alt_ac_contributed_by( $first_author_name, $additional_authors ) {
 	return $all_authors;
 }
 
-function alt_ac_contributed_by_title( $first_author_name, $first_author_id, $additional_authors ) {
-	$all_authors = $first_author_name.' '.alt_ac_description($first_author_id);
-	if ( !empty( $additional_authors[0]['uid'] ) ) {
-	 $all_authors .= ',<br />';
 
+/**
+ * 
+ */
+function alt_ac_contributed_by_title( $first_author_name, $first_author_id, $additional_authors ) {
+	// $all_authors = $first_author_name.' '.alt_ac_description($first_author_id);
+	
+  $all_authors = $first_author_name;
+
+  // hacky way of doing this, but the default case is going to do this most of the time
+  if(empty($additional_authors[0]['uid'])) {
+    $all_authors .= ' ' . alt_ac_description($first_author_id);
+    return $all_authors;
+  }
+  
+ // if ( !empty( $additional_authors[0]['uid'] ) ) {
+
+	 //$all_authors .= ',<br />';
+	 $all_authors .= ', ';
+    
 		foreach( $additional_authors as $addauth ) {
 			$account = user_load( array( 'uid' => $addauth['uid']) );
 			$all_authors .=  l($account->realname, 'user/'. $addauth['uid'] , array('attributes' => array('title' => t($account->realname),'class' => 'username')));
@@ -383,7 +398,7 @@ function alt_ac_contributed_by_title( $first_author_name, $first_author_id, $add
 			//           $all_authors .=  $account->profile_affiliation;
 			if ( next( $additional_authors )==true ) $all_authors .= ', ';
 		}
-	 }
+	// }
 	return $all_authors;
 }
 function alt_ac_description($author_id) {
