@@ -308,7 +308,7 @@ function alt_ac_piece_div( $piece_node, $location ) {
       $piece_thumbnail_path = '/' . file_directory_path() . '/contributed-pieces-th/alt-academy-logo-sq.png'; // <----- Replace this path with the path to the real placeholder thumbnail
 	}
  	$div .= '<div class="cluster-piece-image">' . '<img src="' . base_path() . $piece_thumbnail_path . '" alt="'. check_plain($piece_node->title) .'" />' . '</div>';
-    $div .= '<h4 class="cluster-piece-title">' . l(t(check_plain(truncate_utf8($piece_node->title, 80, TRUE, TRUE))), 'node/' . $piece_node->nid, array('attributes' => array('title' => t("$piece_node->title")))) . '</h4>';
+    $div .= '<h4 class="class">' . l(t(truncate_utf8($piece_node->title, 80, TRUE, TRUE)), 'node/' . $piece_node->nid, array('attributes' => array('title' => t("$piece_node->title")))) . '</h4>';
     $div .= '<p><span class="cluster-piece-contributor">' . $authors_string  . '</span>';
     $div .= '<span class="cluster-piece-revision">' . format_date( $piece_node->revision_timestamp, 'custom', 'F d, Y' ) . '</span></p>';
     $div .= '<div class="cluster-piece-comments">' . $comment_count . '</div>';
